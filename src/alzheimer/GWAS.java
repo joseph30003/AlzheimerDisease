@@ -154,7 +154,18 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 		return result;
 		
 	}
-	
+	public static String Gene_handler(String gene1,String gene2,String gene3,String gene4) {
+	    
+	    if( !gene3.equals("") ){
+	    	return gene3;
+	    }else if( !gene1.equals("") && !gene2.equals("")){
+	    	return gene1+"#"+gene2;
+	    }else{
+	    	return gene4;
+	    }
+		
+		
+	}
 	
 	public static void main(String[] args)
 	  {
@@ -164,7 +175,7 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      String query="select PUBMEDID,DISEASE_TRAIT,REPORTED_GENES,MAPPED_GENE,SNPS from GWAS";
+	      String query="select PUBMEDID,DISEASE_TRAIT,UPSTREAM_GENE_ID,DOWNSTREAM_GENE_ID,SNP_GENE_IDS,MAPPED_GENE,SNPS from GWAS";
 	      
 	     
 	      List<String> relations = new ArrayList<String>();
@@ -177,7 +188,7 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 	      while (rs.next())
 	      {
 	    	 
-	    	  String gene=Gene_handler(rs.getString(3),rs.getString(4));
+	    	  String gene=Gene_handler(rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
 	    	  if(!rs.getString(2).equals("")){
 	    		
 	    		 relations.add(rs.getString(2));
@@ -189,7 +200,7 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 	        	 types.add("Gene");
 	        	
 	        	 }
-	         if(!rs.getString(5).equals("")){
+	         if(!rs.getString(7).equals("")){
 	        	 relations.add(rs.getString(5));
 	        	 types.add("SNP");
 	        	 
