@@ -111,7 +111,18 @@ public class NodesNetwork {
           System.err.println(e.getMessage());
         }
 	}	
-    	
+    
+	public static void run(String table1,String table2,String final_table,Connection conn){
+		
+		  createTable(final_table,conn);
+	      copyTable(table1,final_table,conn);
+	      tableCombine(final_table,table2,conn);	
+		
+	}
+	
+	
+	
+	
 	public static void main(String[] args)
 	  {
 		
