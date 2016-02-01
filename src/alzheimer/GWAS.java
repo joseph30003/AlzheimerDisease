@@ -157,7 +157,7 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 	public static String Gene_handler(String gene1,String gene2,String gene3,String gene4) {
 	    
 	    if( !gene3.equals("") ){
-	    	return gene3;
+	    	return gene3.replace(",", "#");
 	    }else if( !gene1.equals("") && !gene2.equals("")){
 	    	return gene1+"#"+gene2;
 	    }else{
@@ -197,12 +197,12 @@ public static void Edges_update(int node1,int node2,String entry,Connection conn
 	        	 }
 	         if(!gene.equals("")){
 	        	 relations.add(gene);
-	        	 types.add("Gene");
+	        	 types.add("gene");
 	        	
 	        	 }
 	         if(!rs.getString(7).equals("")){
-	        	 relations.add(rs.getString(5));
-	        	 types.add("SNP");
+	        	 relations.add(rs.getString(7));
+	        	 types.add("snp");
 	        	 
 	        	 }
 	         

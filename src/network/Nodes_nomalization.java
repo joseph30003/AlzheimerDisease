@@ -79,7 +79,7 @@ public class Nodes_nomalization {
 				
 			}
 	      
-	      conn.close();
+	      
 	    }
 	    catch (Exception e)
 	    {
@@ -98,7 +98,7 @@ public class Nodes_nomalization {
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	      
-	      
+	      metamapUpdate(conn);
 	      
 	      
 	      conn.close();

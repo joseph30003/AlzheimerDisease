@@ -1,6 +1,8 @@
 package alzheimer;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +10,15 @@ public class String_handler {
 	
 	public static String[] String_spliter(String in){
 		String[] array=in.split("#");
+		List<String> list = new ArrayList<String>();
+
+	    for(String s : array) {
+	       if(s != null && s.length() > 0) {
+	          list.add(s);
+	       }
+	    }
+
+	    array = list.toArray(new String[list.size()]);
 		return array;
 			
 	}
