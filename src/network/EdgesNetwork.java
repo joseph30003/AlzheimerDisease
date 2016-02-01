@@ -94,7 +94,13 @@ public static int node_new(int node_id,String table,Connection conn) {
     }
 	
 
-	
+	public static void run(String table1,String table2,String final_table,String Ref_table,Connection conn){
+		
+		  createTable(final_table,conn);
+	      copyTable(table1,final_table,conn);
+	      copyTable(table2,final_table,Ref_table,conn);
+	      
+	}
 	
 	
 	
