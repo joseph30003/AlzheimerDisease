@@ -12,16 +12,19 @@ import com.mysql.jdbc.PreparedStatement;
 public class NodesNetwork {
 
 	public static void createTable(String table_name,Connection conn) {
-        String myTableName = "CREATE TABLE "+table_name+" (" 
+		String drop="DROP TABLE IF EXISTS "+table_name;
+		
+		String myTableName = "CREATE TABLE "+table_name+" (" 
             + "id INT NOT NULL AUTO_INCREMENT,"  
             + "name VARCHAR(100)," 
             + "type VARCHAR(100)," 
             + "net2_id INT, PRIMARY KEY (`id`))";  
         
         try {
-            
+        	
             Statement st = conn.createStatement();
             //The next line has the issue
+            st.executeUpdate(drop);
             st.executeUpdate(myTableName);
             System.out.println("Table Created");
         }
@@ -84,12 +87,13 @@ public class NodesNetwork {
 	    
     	try{
     		    PreparedStatement node_update =  (PreparedStatement) conn.prepareStatement("update "+table1+" set net2_id = ? where id = ?");
-    		    PreparedStatement node_insert =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+table1+"(name,net2_id) VALUES(?,?)");
-    		    String query = "select id,name from "+table2;
+    		    PreparedStatement node_insert =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+table1+"(name,net2_id,type) VALUES(?,?,?)");
+    		    String query = "select id,name,type from "+table2;
     			ResultSet rs = conn.createStatement().executeQuery(query);
     			  
     		     
     			while(rs.next()){
+    				String type=rs.getString(3);
     				int table2_id=rs.getInt(1);
     				String node=rs.getString(2);
     				int table1_id=node_contain(node,table1,conn);
@@ -100,6 +104,7 @@ public class NodesNetwork {
     				}else{
     				  node_insert.setString(1, node);
   					  node_insert.setInt(2, table2_id);
+  					  node_insert.setString(3, type);
   				      node_insert.executeUpdate();
     				}
     			}

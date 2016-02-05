@@ -18,8 +18,8 @@ public class NetIntegrate {
 	      NodesNetwork.run("GP_nodes", "KEGG_nodes_trimed", "GPK_nodes", conn);
 	      EdgesNetwork.run("GP_edges", "KEGG_edges_trimed", "GPK_edges", "GPK_nodes", conn);
 	      
-	      NodesNetwork.run("GPK_nodes", "GKB_nodes_trimed", "GPKG_nodes", conn);
-	      EdgesNetwork.run("GPK_edges", "GKB_edges_trimed", "GPKG_edges", "GPKG_nodes", conn);
+	      NodesNetwork.run("GPK_nodes", "PharmGKB_nodes_trimed", "GPKG_nodes", conn);
+	      EdgesNetwork.run("GPK_edges", "PharmGKB_edges_trimed", "GPKG_edges", "GPKG_nodes", conn);
 	      
 	      
 	      conn.close();

@@ -36,7 +36,9 @@ public static int node_new(int node_id,String table,Connection conn) {
 	}
 	
 	public static void createTable(String table_name,Connection conn) {
-        String myTableName = "CREATE TABLE "+table_name+" (" 
+        
+		String drop="DROP TABLE IF EXISTS "+table_name;
+		String myTableName = "CREATE TABLE "+table_name+" (" 
             + "node1 INT,"
             + "node2 INT)";  
         
@@ -44,6 +46,7 @@ public static int node_new(int node_id,String table,Connection conn) {
             
             Statement st = conn.createStatement();
             //The next line has the issue
+            st.executeUpdate(drop);
             st.executeUpdate(myTableName);
             System.out.println("Table Created");
         }
