@@ -12,7 +12,7 @@ public class test {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		String terms="Alzheimer disease";
-		MetaMapApi api = new MetaMapApiImpl("biomedinformatics.is.umbc.edu");
+		MetaMapApi api = new MetaMapApiImpl();
 		api.setOptions("-y -k dsyn"); 
 		List<Result> resultList = api.processCitationsFromString(terms);
 		
