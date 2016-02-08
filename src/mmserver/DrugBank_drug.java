@@ -57,7 +57,7 @@ public class DrugBank_drug {
    	     
    	     
    	     while(rs.next()){
-   		 String term=rs.getString(2);
+   		 String term=rs.getString(2).replaceAll("[^a-zA-Z1-9 ]", "");
    		 int source_id=rs.getInt(1);
          List<Result> resultList = api.processCitationsFromString(term);
 		 Result result = resultList.get(0);
