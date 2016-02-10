@@ -9,11 +9,11 @@ import gov.nih.nlm.nls.metamap.*;
 
 public class test {
 
-	public static void main(String[] args) throws Exception {
+	public static void run(String terms,MetaMapApi api)  {
 		// TODO Auto-generated method stub
-		String terms="Alzheimer disease";
-		MetaMapApi api = new MetaMapApiImpl();
-		api.setOptions("-y -k dsyn"); 
+		try{
+		
+		
 		List<Result> resultList = api.processCitationsFromString(terms);
 		
 		
@@ -49,7 +49,16 @@ public class test {
 				
 		          }
 			}
-	}
+	    }
+		
+	}	
+		catch (Exception e)
+	    {
+	      System.err.println("Got an exception! ");
+	      e.printStackTrace();
+	    }
+		
+		
 	}
 }
 	

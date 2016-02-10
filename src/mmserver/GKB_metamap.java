@@ -18,20 +18,20 @@ public class GKB_metamap {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String[] sources={"GKB"};
-		String[] types={"disease","Drug"};
+		String type="disease";
 	    try
 	    {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-y -k dsyn"); 
+		 api.setOptions("-y -J dsyn"); 
 	     for(int i=0;i < sources.length; i++){
 	    	 
-	    	 for(int j=0;j < types.length; j++){
+	    	
 	    	 
 		 
 		 
-	     String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+types[j]+"\" and reference_name is null" ;
+	     String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+type+"\" and reference_name is null" ;
 	     //System.out.println(query_search);
    	     ResultSet rs = conn.createStatement().executeQuery(query_search);
    	     
@@ -50,7 +50,7 @@ public class GKB_metamap {
 		            for (Ev mapEv: map.getEvList()) {
 		              
 		                //System.out.println(term);
-		            	Database_update.DataInput(term,source_id,mapEv.getPreferredName(),mapEv.getConceptId(),types[j],Math.abs(mapEv.getScore()),sources[i],conn);
+		            	Database_update.DataInput(term,source_id,mapEv.getPreferredName(),mapEv.getConceptId(),type,Math.abs(mapEv.getScore()),sources[i],conn);
 		            	              
 		                                       }
 				
@@ -60,10 +60,10 @@ public class GKB_metamap {
    		
     	  
       }
-	     }
+	     
 	    
 	     }
-	      
+	      api.disconnect();
 	    }
 	    catch (Exception e)
 	    {

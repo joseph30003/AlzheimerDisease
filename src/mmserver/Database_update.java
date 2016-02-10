@@ -43,26 +43,32 @@ public class Database_update {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String[] sources={"KEGG","GWAS","PheWAS"};
-		String[] types={"disease","Drug"};
+		String type="drug";
 	    try
 	    {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-y -k dsyn"); 
+		 api.setOptions("-Y"); 
+		 
+		  
+		 
 	     for(int i=0;i < sources.length; i++){
-	    	 
-	    	 for(int j=0;j < types.length; j++){
+	    	    	 
 	    	 
 		 
 		 
-	     String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+types[j]+"\"" ;
+	     String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+type+"\"" ;
 	     //System.out.println(query_search);
+	     
    	     ResultSet rs = conn.createStatement().executeQuery(query_search);
    	     
    	     
    	     while(rs.next()){
+   	    	 
    		 String term=rs.getString(2).replaceAll("[^a-zA-Z1-9 ]", "");
+   		 test.run(term,api);
+   		
    		 int source_id=rs.getInt(1);
          List<Result> resultList = api.processCitationsFromString(term);
 		 Result result = resultList.get(0);
@@ -75,7 +81,7 @@ public class Database_update {
 		            for (Ev mapEv: map.getEvList()) {
 		              
 		                //System.out.println(term);
-		            	DataInput(term,source_id,mapEv.getPreferredName(),mapEv.getConceptId(),types[j],Math.abs(mapEv.getScore()),sources[i],conn);
+		            	DataInput(term,source_id,mapEv.getPreferredName(),mapEv.getConceptId(),type,Math.abs(mapEv.getScore()),sources[i],conn);
 		            	              
 		                                       }
 				
@@ -85,7 +91,7 @@ public class Database_update {
    		
     	  
       }
-	     }
+	     
 	    
 	     }
 	      
