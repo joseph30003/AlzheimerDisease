@@ -155,7 +155,7 @@ public static int newID(int old_id,String network,Connection conn) {
 	    
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      String[] sources={"PharmGKB"};
+	      String[] sources={"KEGG","GWAS","PheWAS","GKB","FDA"};
 	      for(int i=0;i < sources.length; i++){
 	      createNet(sources[i],conn);
 	      nodeUpdate(sources[i],conn);

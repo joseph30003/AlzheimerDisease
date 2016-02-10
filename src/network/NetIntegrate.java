@@ -24,6 +24,9 @@ public class NetIntegrate {
 	      NodesNetwork.run("GPKG_nodes", "DrugBank_nodes", "GPKGD_nodes", conn);
 	      EdgesNetwork.run("GPKG_edges", "DrugBank_edges", "GPKGD_edges", "GPKGD_nodes", conn);
 	      
+	      NodesNetwork.run("GPKGD_nodes", "FDA_nodes", "GPKGDF_nodes", conn);
+	      EdgesNetwork.run("GPKGD_edges", "FDA_edges", "GPKGDF_edges", "GPKGDF_nodes", conn);
+	      
 	      conn.close();
 	    }
 	    catch (Exception e)
