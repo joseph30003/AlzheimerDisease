@@ -48,7 +48,7 @@ public class AlzheimerNet {
 public static boolean Edges_contains(int node1,int node2,String network,Connection conn){
 	boolean result = false;
 	try{
-		String query = "select id from "+network+"_edges where node1="+node1+" and node2="+node2;
+		String query = "select * from "+network+"_edges where node1="+node1+" and node2="+node2;
 		ResultSet rs = conn.createStatement().executeQuery(query);
 	      
 	     
