@@ -97,12 +97,12 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	public static boolean Nodes_containts(String network,int node,Connection conn) {
 		boolean result=false; 
 		try{
-		String query = "select * from "+network+"_nodes where id=\""+node+"\"";
+		String query = "select id from "+network+"_nodes where id=\""+node+"\"";
 		ResultSet rs = conn.createStatement().executeQuery(query);
 	      
 	     
 		if(rs.next()){
-			System.out.print(rs.getString(node)+"\n");
+			//System.out.print(rs.getInt(1)+"\n");
 			result = true;
 		}
 			

@@ -196,12 +196,12 @@ public static void gene_update(int new_id,int old_id,Connection conn) {
 	
 	try{
 		
-		String p_query="select PID from DrugBank_Target where id="+old_id;
+		String p_query="select gene from DrugBank_gene where id="+old_id;
 		Statement st = conn.createStatement();
         ResultSet rs_p = st.executeQuery(p_query);
         while(rs_p.next()){
        	  
-        int p_id=Nodes_update(rs_p.getString(1),"P",conn);
+        int p_id=Nodes_update(rs_p.getString(1),"gene",conn);
         Edges_update(new_id,p_id,conn);
       	  
         }
