@@ -45,6 +45,27 @@ public class AlzheimerNet {
         }
     }	
 	
+public static boolean Edges_contains(int node1,int node2,String network,Connection conn){
+	boolean result = false;
+	try{
+		String query = "select id from "+network+"_edges where node1="+node1+" and node2="+node2;
+		ResultSet rs = conn.createStatement().executeQuery(query);
+	      
+	     
+		if(rs.next()){
+			//System.out.print(rs.getInt(1)+"\n");
+			result = true;
+		
+		}
+		
+    }
+ catch (Exception e)
+  {
+  System.err.println("Got an exception! ");
+  System.err.println(e.getMessage());
+  } 
+	return result;
+}
 	
 	
 	
@@ -52,15 +73,16 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 		
 	    
     	try{
-    		
+    		     PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+network+"_edges(node1,node2) VALUES(?,?)");
     			for (int i=0; i<node2.size();i++){
     				
-    				PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+network+"_edges(node1,node2) VALUES(?,?)");
+    				
+    				if( !Edges_contains(node1,node2.get(i),network,conn) && !Edges_contains(node2.get(i),node1,network,conn) ){
     	            pst_user.setInt(1, node1);
     	            pst_user.setInt(2, node2.get(i));
     	            
     	            pst_user.execute();
-    				
+    				}
     			}
     			
     	}
