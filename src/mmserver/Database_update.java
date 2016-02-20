@@ -42,14 +42,14 @@ public class Database_update {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] sources={"KEGG","GWAS","PheWAS"};
-		String type="drug";
+		String[] sources={"KEGG","GWAS","PheWAS","FDA"};
+		String type="disease";
 	    try
 	    {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-Y"); 
+		 api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy"); 
 		 
 		  
 		 
@@ -67,7 +67,7 @@ public class Database_update {
    	     while(rs.next()){
    	    	 
    		 String term=rs.getString(2).replaceAll("[^a-zA-Z1-9 ]", "");
-   		 test.run(term,api);
+   		 //test.run(term,api);
    		
    		 int source_id=rs.getInt(1);
          List<Result> resultList = api.processCitationsFromString(term);

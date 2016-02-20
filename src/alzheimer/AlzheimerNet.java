@@ -189,7 +189,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 		List<Integer> relations_1 = new ArrayList<Integer>();
 		List<Integer> relations_0 = null;
 		List<Integer> relations_list = new ArrayList<Integer>();
-		String network="Alzheimer";
+		String network="Alzheimer_3layer";
 		
 	    try
 	    {
@@ -199,9 +199,10 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	      relations_list.add(3218);
 	      createNet(network,conn);
-	      
-	      while(relations_list.size()>0){
+	      int layer=0;
+	      while(layer < 3){
 	    	
+	    	  layer++;
 	    	  relations_1.clear();
 	    	  relations_0 = new ArrayList<Integer>(relations_list);
 	    	  relations_list.clear();

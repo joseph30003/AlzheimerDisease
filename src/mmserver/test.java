@@ -60,5 +60,12 @@ public class test {
 		
 		
 	}
+	
+	public static void main(String[] args){
+		MetaMapApi api = new MetaMapApiImpl("biomedinformatics.is.umbc.edu");
+		api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy"); 
+		run("Alzheimer's disease",api); 
+	}
+	
 }
 	
