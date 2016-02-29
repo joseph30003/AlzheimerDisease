@@ -23,8 +23,8 @@ public class GKB_metamap {
 	    {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-y -J dsyn"); 
+	     MetaMapApi api = new MetaMapApiImpl("biomedinformatics.is.umbc.edu");
+		 api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy"); 
 	     for(int i=0;i < sources.length; i++){
 	    	 
 	    	
