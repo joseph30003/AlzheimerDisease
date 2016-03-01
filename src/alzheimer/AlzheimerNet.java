@@ -197,7 +197,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      relations_list.add(3218);
+	      relations_list.add(2925);
 	      createNet(network,conn);
 	      
 	      while(relations_list.size()>0){
