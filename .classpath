@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="MetaMapApi.jar"/>
 	<classpathentry kind="lib" path="prologbeans.jar"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.38.jar"/>
+	<classpathentry kind="lib" path="opennlp-tools-1.6.0.jar"/>
+	<classpathentry kind="lib" path="opennlp-uima-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
