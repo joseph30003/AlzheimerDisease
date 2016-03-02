@@ -22,7 +22,7 @@ List<Parse> result = new ArrayList<Parse>();
 
 public Parser(String s, String key) throws InvalidFormatException, IOException{
 	
-	InputStream is = new FileInputStream("/Users/joseph/Downloads/en-parser-chunking.bin");
+	InputStream is = new FileInputStream("/home/weijianqin/en-parser-chunking.bin");
 	 
 	ParserModel model = new ParserModel(is);
  
