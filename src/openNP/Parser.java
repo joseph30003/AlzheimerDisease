@@ -20,9 +20,9 @@ List<Parse> result = new ArrayList<Parse>();
 
 
 
-public Parser(String s, String key) throws InvalidFormatException, IOException{
+public Parser(String s) throws InvalidFormatException, IOException{
 	
-	InputStream is = new FileInputStream("/home/weijianqin/en-parser-chunking.bin");
+	InputStream is = new FileInputStream("/Users/joseph/Downloads/en-parser-chunking.bin");
 	 
 	ParserModel model = new ParserModel(is);
  
@@ -32,32 +32,32 @@ public Parser(String s, String key) throws InvalidFormatException, IOException{
 	
 	Parse topParses[] = ParserTool.parseLine(sentence, parser, 1);
     
-	isNode(topParses[0],key);
+	isNode(topParses[0]);
 
 	is.close();
 }
 
 	
-public void isNode(Parse p,String word){
+public void isNode(Parse p){
 	
 	
-	if (p.getCoveredText().equals(word) && p.getType().equals("TK")) {
+	if (p.getType().equals("JJ")) {
 		//System.out.println(p.getHeadIndex());
 		result.add(p);
 	}
 	for(Parse child : p.getChildren()){
-		isNode(child,word);
+		isNode(child);
 	}
 	
 }
 	
 	
 	public static void main(String[] args) throws InvalidFormatException, IOException {
-		String sentence="Urokinase can be used for the of pulminary embolism coronary artery thrombosis IV catheter clearance and venous and arterial blood clots";
-		Parser pp = new Parser(sentence,"treatment");
+		String sentence="Urokinase can be used for the treatment of pulminary embolism coronary artery thrombosis IV catheter clearance and venous and arterial blood clots";
+		Parser pp = new Parser(sentence);
 		
 		for(Parse t : pp.result){
-			System.out.println(t.getParent().getParent().getParent().getCoveredText());
+			System.out.println(t.getParent().getCoveredText());
 		}
 	}
 }

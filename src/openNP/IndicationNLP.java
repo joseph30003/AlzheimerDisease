@@ -73,7 +73,7 @@ public class IndicationNLP {
 	      String query = "select id,indication from DrugBank_drug where indication is not NULL";
 		  ResultSet rs = conn.createStatement().executeQuery(query);
 	      while(rs.next()){
-	    	  Parser pp = new Parser(rs.getString(2),"treatment");
+	    	  Parser pp = new Parser(rs.getString(2));
 	    	  for(Parse t : pp.result){
 	    	  updateTable(rs.getInt(1),rs.getString(2),t.getParent().getParent().getParent().getCoveredText(),conn);
 	    	  }
