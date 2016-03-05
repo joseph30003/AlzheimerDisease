@@ -185,6 +185,64 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 		return relations1;
 	}
 	
+	public static void run(int key,Connection conn)
+	  {
+		List<Integer> relations_1 = new ArrayList<Integer>();
+		List<Integer> relations_0 = null;
+		List<Integer> relations_list = new ArrayList<Integer>();
+		String network="Alzheimer";
+		
+	    try
+	    {
+	    
+	      
+	      relations_list.add(key);
+	      createNet(network,conn);
+	      
+	      for(int i=0; i<=3; i++){
+	    	
+	    	  relations_1.clear();
+	    	  relations_0 = new ArrayList<Integer>(relations_list);
+	    	  relations_list.clear();
+	               
+	    	 
+	    	  
+	    	  for(int j=0; j<relations_0.size(); j++){
+	    	  
+	    	  if(!Nodes_containts(network,relations_0.get(j),conn)){
+	    		  
+	    		  Nodes_update(network,relations_0.get(j),i,conn); 
+	    	      
+	    		  relations_1=Realtions_collector(relations_0.get(j),"node1","node2","GPKGDF_edges",conn);
+	      
+	    	      for(int k=0; k<relations_1.size(); k++){
+	  			   if(!relations_list.contains(relations_1.get(k))){
+	  				relations_list.add(relations_1.get(k));
+	  				  }
+	    	        }// insert values to the list;
+	    	  
+	              Edges_update(network,relations_0.get(j),relations_1,conn);
+	      
+	    	  }
+	                  
+	       } 
+	      
+	      
+	     }
+	      
+	      conn.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("Got an exception! ");
+	      e.printStackTrace();
+	    }
+	  }
+	
+	
+	
+	
+	
 	public static void main(String[] args)
 	  {
 		List<Integer> relations_1 = new ArrayList<Integer>();

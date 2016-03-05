@@ -2,6 +2,7 @@ package network;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 public class NetIntegrate {
 
@@ -26,6 +27,14 @@ public class NetIntegrate {
 	      
 	      NodesNetwork.run("GPKGD_nodes", "FDA_nodes_trimed", "GPKGDF_nodes", conn);
 	      EdgesNetwork.run("GPKGD_edges", "FDA_edges_trimed", "GPKGDF_edges", "GPKGDF_nodes", conn);
+	      
+	       String query_node= "select id from GPKGDF_nodes where name=\"C0002395\"";
+  		   ResultSet rs_node = conn.createStatement().executeQuery(query_node);
+  		
+  		  if(rs_node.next()){
+  			alzheimer.AlzheimerNet.run(rs_node.getInt(1), conn);
+  			
+  		 }  
 	      
 	      conn.close();
 	    }
