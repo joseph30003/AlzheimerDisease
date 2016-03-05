@@ -17,7 +17,8 @@ public class AlzheimerNet {
         
         
 		String nodesTable = "CREATE TABLE "+network+"_nodes (" 
-            + "id INT NOT NULL,"  
+            + "id INT NOT NULL,"
+            + "level INT NOT NULL,"
             + "name VARCHAR(100)," 
             + "type VARCHAR(100),PRIMARY KEY (id))";  
         
@@ -93,16 +94,16 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
         }
 	}	
     	
-	public static void Nodes_update(String network,int node,Connection conn) {
+	public static void Nodes_update(String network,int node,int level,Connection conn) {
     		
     	    
         	try{
         		
         			
         				
-        				PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+network+"_nodes(id) VALUES(?)");
+        				PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+network+"_nodes(id,level) VALUES(?,?)");
         	            pst_user.setInt(1, node);
-        	            
+        	            pst_user.setInt(2, level);
         	             pst_user.execute();
         				
         			
@@ -200,7 +201,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      relations_list.add(2925);
 	      createNet(network,conn);
 	      
-	      while(relations_list.size()>0){
+	      for(int i=0; i<=3; i++){
 	    	
 	    	  relations_1.clear();
 	    	  relations_0 = new ArrayList<Integer>(relations_list);
@@ -212,7 +213,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	    	  
 	    	  if(!Nodes_containts(network,relations_0.get(j),conn)){
 	    		  
-	    		  Nodes_update(network,relations_0.get(j),conn); 
+	    		  Nodes_update(network,relations_0.get(j),i,conn); 
 	    	      
 	    		  relations_1=Realtions_collector(relations_0.get(j),"node1","node2","GPKGDF_edges",conn);
 	      

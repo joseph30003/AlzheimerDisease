@@ -51,7 +51,7 @@ public class DrugBank_metamap {
 	        	 
 		 
 		 
-	     String query_search = "select id,Indication from DrugBank_drug where Indication is not null" ;
+	     String query_search = "select id,Indication from DrugBank_indication where Indication is not null" ;
 	     //System.out.println(query_search);
    	     ResultSet rs = conn.createStatement().executeQuery(query_search);
    	     
