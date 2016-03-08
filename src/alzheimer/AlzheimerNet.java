@@ -248,7 +248,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 		List<Integer> relations_1 = new ArrayList<Integer>();
 		List<Integer> relations_0 = null;
 		List<Integer> relations_list = new ArrayList<Integer>();
-		String network="Alzheimer";
+		String network="Alzheimer_3layer";
 		
 	    try
 	    {
@@ -256,11 +256,12 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      relations_list.add(2925);
+	      relations_list.add(3218);
 	      createNet(network,conn);
-	      
-	      for(int i=0; i<=3; i++){
+	     
+	    for(int i=0;i<4;i++){
 	    	
+	    	  
 	    	  relations_1.clear();
 	    	  relations_0 = new ArrayList<Integer>(relations_list);
 	    	  relations_list.clear();
@@ -297,6 +298,9 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      System.err.println("Got an exception! ");
 	      e.printStackTrace();
 	    }
+	    
+	 
+	    
 	  }
 	
 	

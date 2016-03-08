@@ -61,7 +61,7 @@ public class Nodes_nomalization {
 	    
 	      
 	      
-		  String query = "select a.id,a.source,a.source_id from Metamap a inner join (select source,source_id,max(score) max_score from Metamap group by source,source_id ) b on a.source=b.source and a.source_id=b.source_id and a.score=b.max_score and a.score>=800";
+		  String query = "select a.id,a.source,a.source_id from Metamap a inner join (select source,source_id,max(score) max_score from Metamap group by source,source_id ) b on a.source=b.source and a.source_id=b.source_id and a.score=b.max_score and a.score>=900";
 		  ResultSet rs = conn.createStatement().executeQuery(query);
 			  
 		     
