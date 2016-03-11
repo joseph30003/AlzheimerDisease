@@ -20,7 +20,7 @@ public class Normalize {
 				  
 			     
 				while(rs.next()){
-					result=rs.getString(1)+","+rs.getString(2);
+					result=rs.getString(1).replace(",","")+","+rs.getString(2);
 								 
 					
 					
@@ -43,7 +43,11 @@ public class Normalize {
 		      String query_1 = "select prefer_name from Metamap where ID=\""+UMID+"\"";
 			  ResultSet rs_1 = conn.createStatement().executeQuery(query_1);
 			  String query_2 = "select prefer_name from DrugBank_disease where UMLS=\""+UMID+"\"";
-			  ResultSet rs_2 = conn.createStatement().executeQuery(query_2);  
+			  ResultSet rs_2 = conn.createStatement().executeQuery(query_2);
+			  String query_3 = "select prefer_name from DrugBank_Metamap where UMLS=\""+UMID+"\"";
+			  ResultSet rs_3 = conn.createStatement().executeQuery(query_3);
+			  String query_4 = "select Name from UMLS where id=\""+UMID+"\"";
+			  ResultSet rs_4 = conn.createStatement().executeQuery(query_4);
 			     
 				if(rs_1.next()){
 					result=rs_1.getString(1);	 
@@ -51,7 +55,11 @@ public class Normalize {
 					
 				}else if(rs_2.next()){
 					result=rs_2.getString(1);
-				}
+				}else if(rs_3.next()){
+					result=rs_3.getString(1);
+					}else if(rs_4.next()){
+						result=rs_4.getString(1);}
+				
 		      
 		     		    }
 		    catch (Exception e)
@@ -65,16 +73,16 @@ public class Normalize {
 	}
 	public static String get_UMLS(String name,Connection conn){
 		
-		Pattern patt = Pattern.compile("C[0-9]+");
+		Pattern patt = Pattern.compile("^(C)[0-9]+");
     	Matcher m = patt.matcher(name);
     	 
         // if we find a match, get the group 
         if (m.find())
         {
           
-        	return get_Pname(name,conn);
+        	return get_Pname(name,conn).replace(",", "");
  
-        }else return name;
+        }else return name.replace(",", "");
 		
 	}
 	
@@ -98,15 +106,25 @@ public class Normalize {
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		      
 		      
-		      String query = "select id from networkresult";
+		      String query = "select id from Alzheimer_nodes";
 			  ResultSet rs = conn.createStatement().executeQuery(query);
-				  
+		      String file="/Users/joseph/nodes.csv";
+		      File_creator.writetofile("Id,Label,type", file);
 			     
 				while(rs.next()){
 					int id=rs.getInt(1);
+				
 					String[] result=raw_name(id,conn).split(",");
-					Update(id,get_UMLS(result[0],conn),conn);
-					System.out.println(get_UMLS(result[0],conn));
+					//Update(id,get_UMLS(result[0],conn),conn);
+					if(result[1].equals("disease")||result[1].equals("drug")){
+				
+					System.out.println(id+","+get_UMLS(result[0],conn)+","+result[1]);
+					File_creator.writetofile(id+","+get_UMLS(result[0],conn)+","+result[1], file);
+					}
+					else {
+						System.out.println(id+","+result[0]+","+result[1]);
+						File_creator.writetofile(id+","+result[0].replace(",", "")+","+result[1], file);
+					}
 						 
 					
 					

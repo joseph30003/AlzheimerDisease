@@ -15,7 +15,7 @@ public class Trimer {
         
 		String nodesTable = "CREATE TABLE "+network+"_nodes_trimed (" 
             + "id INT NOT NULL AUTO_INCREMENT,"  
-            + "name VARCHAR(100)," 
+            + "name VARCHAR(300)," 
             + "type VARCHAR(100),PRIMARY KEY (id))";  
         
         String edgesTable = "CREATE TABLE "+network+"_edges_trimed (" 

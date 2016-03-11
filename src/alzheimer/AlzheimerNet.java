@@ -199,7 +199,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      relations_list.add(key);
 	      createNet(network,conn);
 	      
-	      for(int i=0; i<=3; i++){
+	      for(int i=0; i<4; i++){
 	    	
 	    	  relations_1.clear();
 	    	  relations_0 = new ArrayList<Integer>(relations_list);
@@ -230,7 +230,7 @@ public static void Edges_update(String network,int node1,List<Integer> node2,Con
 	      
 	     }
 	      
-	      conn.close();
+	     
 	    }
 	    catch (Exception e)
 	    {

@@ -16,7 +16,7 @@ public class NodesNetwork {
 		
 		String myTableName = "CREATE TABLE "+table_name+" (" 
             + "id INT NOT NULL AUTO_INCREMENT,"  
-            + "name VARCHAR(255)," 
+            + "name VARCHAR(300)," 
             + "type VARCHAR(100)," 
             + "net2_id INT, PRIMARY KEY (`id`))";  
         

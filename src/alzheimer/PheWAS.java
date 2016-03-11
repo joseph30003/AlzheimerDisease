@@ -160,7 +160,7 @@ public static void Edges_update(int node1,int node2,Connection conn) {
 	        	 types.add("disease");
 	        	 
 	        	 }
-	         if(!rs.getString(3).equals("")){
+	         if(!rs.getString(3).equals("")&&!rs.getString(3).equals("NULL")){
 	        	 relations.add(rs.getString(3));
 	        	 types.add("gene");
 	        	 
