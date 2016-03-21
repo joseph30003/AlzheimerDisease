@@ -21,24 +21,30 @@ public class NLP_Parser {
 	 
 	 NLP_Parser(String P,String text){
 		Path=P;
-		try{
-		// http://sourceforge.net/apps/mediawiki/opennlp/index.php?title=Parser#Training_Tool
-			InputStream is = new FileInputStream(Path+"/en-sent.bin");
-			SentenceModel model = new SentenceModel(is);
-			SentenceDetectorME sdetector = new SentenceDetectorME(model);
-		 
-			String sentences[] = sdetector.sentDetect(text);
-		 
-			for(String st: sentences){
-				Sentence(st.replace(",",""));
-			}
-			is.close();}
-		catch(Exception e){
-			System.err.println("Got an exception! ");
-		    e.printStackTrace();
-			
+		
 		}
-		}
+	 public void SentencePaser(String text){
+		 try{
+				// http://sourceforge.net/apps/mediawiki/opennlp/index.php?title=Parser#Training_Tool
+					InputStream is = new FileInputStream(Path+"/en-sent.bin");
+					SentenceModel model = new SentenceModel(is);
+					SentenceDetectorME sdetector = new SentenceDetectorME(model);
+				 
+					String sentences[] = sdetector.sentDetect(text);
+				 
+					for(String st: sentences){
+						Sentence(st.replace(",",""));
+					}
+					is.close();}
+				catch(Exception e){
+					System.err.println("Got an exception! ");
+				    e.printStackTrace();
+					
+				}
+	 }
+	 
+	 
+	 
 	private void Sentence(String S){
 		 try{
 				// http://sourceforge.net/apps/mediawiki/opennlp/index.php?title=Parser#Training_Tool

@@ -10,7 +10,7 @@ public class Test {
 		String text2="For use as adjunctive therapy to diet to reduce elevated LDL-C, Total-C,Triglycerides and Apo B, and to increase HDL-C in adult patients with primary hypercholesterolemia or mixed dyslipidemia (Fredrickson Types IIa and IIb)";
 		String text3="For detection of residueal or recurrent thyroid cancer";
 		
-			NLP_Parser p=new NLP_Parser("/Users/joseph/Downloads/",text3);
+			NLP_Parser p=new NLP_Parser("C:/Users/xf37538/Downloads",text1);
 			for(String t : p.result){
 				System.out.println(t);
 				
