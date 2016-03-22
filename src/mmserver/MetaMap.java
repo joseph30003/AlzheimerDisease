@@ -41,7 +41,7 @@ public class MetaMap{
    }
 	
   	public String Paser(String term){
-  		String UMLS=null;
+  		String UMLS="";
 		try
 	    {
          List<Result> resultList = api.processCitationsFromString(term);
