@@ -14,9 +14,10 @@ public class Test {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable FDA = new FDA_NET(conn);
+		      NetTable GWAS = new GWAS(conn);
+		      GWAS.build();
 		     
-		      System.out.println(FDA.findEdge(56));
+		      System.out.println(GWAS.NodesNum);
 		      conn.close();
 		    }
 		    catch (Exception e)

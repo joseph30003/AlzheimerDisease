@@ -2,20 +2,13 @@ package database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.Statement;
+public class FDA extends NetTable{
 
-
-public class FDA_NET extends NetTable {
-
-	
-	
-	
-	
-	
-	public FDA_NET(Connection con) {
+	public FDA(Connection con) {
 		super("FDA", con);
 		
 	}
@@ -121,8 +114,6 @@ public class FDA_NET extends NetTable {
 		edgeInsert(id_1,id_2);	
 
 	}
-	
-	
 	
 	
 }
