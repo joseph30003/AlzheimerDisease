@@ -8,7 +8,7 @@ public class example {
     String result = mm.Paser("cancer");
     
     System.out.println(result);
-
+    mm.close();
 	}
 
 }

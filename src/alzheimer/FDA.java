@@ -50,7 +50,7 @@ public class FDA {
 	
 	
 	
-public static void Edges_update(String network,int node1,int node2,Connection conn) {
+ public static void Edges_update(String network,int node1,int node2,Connection conn) {
 		
 	    
     	try{
