@@ -3,9 +3,9 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Test {
-
-	public static void main(String[] args)
+public class Run {
+	
+		public static void main(String[] args)
 	  {
 		try{
 			// create our mysql database connection
@@ -14,10 +14,10 @@ public class Test {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable GWAS = new GWAS(conn);
-		      GWAS.build();
+		      NetTable KEGG = new KEGG(conn);
+		      KEGG.build();
 		     
-		      System.out.println(GWAS.NodesNum);
+		      System.out.println(KEGG.NodesNum);
 		      conn.close();
 		    }
 		    catch (Exception e)
@@ -30,6 +30,5 @@ public class Test {
 	
 	
 }
-	
-	
+
 }
