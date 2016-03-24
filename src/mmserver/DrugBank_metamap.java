@@ -47,7 +47,7 @@ public class DrugBank_metamap {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy"); 
+		 api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy,acab,anab,comd,cgab,emod,fngs,inpo,inpr"); 
 	        	 
 		 
 		 
