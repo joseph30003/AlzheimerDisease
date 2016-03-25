@@ -16,7 +16,7 @@ public class Run {
 		   
 		      NetTable KEGG = new KEGG(conn);
 		      KEGG.build();
-		     
+		      
 		      System.out.println(KEGG.NodesNum);
 		      conn.close();
 		    }

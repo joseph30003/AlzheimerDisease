@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import alzheimer.String_handler;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class KEGG extends NetTable {
 	
@@ -20,6 +21,29 @@ public void build(){
 	relations_extrator();
 }
 
+public String Handler(String in){
+    String out=in.replaceAll("\\[.*?\\] ?", "").replaceAll("[\\$#]", " ").replaceAll("\\s+$", "");
+	return out;
+    }
+	
+ public String geneHandler(String in){
+	 String out=HSAfinder(in);
+	 if(out==""){
+		 return Handler(in);
+	 }else return out;
+ }
+
+ public String HSAfinder(String in){
+ 	
+ 	Pattern p = Pattern.compile("\\[HSA:(.*?)\\]");
+ 	Matcher m = p.matcher(in);
+		String out = "";
+		if(m.find()) {
+		    out = m.group(1);
+		}
+ 	return out;
+ }
+ 
 public void relations_extrator()
 {
 	try{
@@ -38,27 +62,35 @@ public void relations_extrator()
     {
   	    	  
   	  if(!rs.getString("Name").equals("")){
-  		 String[] dis=rs.getString("Name").split("#");
-  		 String disease="";
-  		 for(int i=0;i<dis.length;i++){
-  			 disease=disease+dis[i]+"["+rs.getString("Entry")+"]"+"#";
-  			
-  		 }
+  		
+  		 String disease=Handler(rs.getString("Name"));
+  		
   		 relations.add(disease);
-  		System.out.println("disease");
-  		 types.add(disease);
+  		 System.out.println(disease);
+  		 types.add("disease");
       
       	 }
        if(!rs.getString("Gene").equals("")){
-      	 relations.add(rs.getString("Gene"));
-      	System.out.println(rs.getString("Gene"));
-      	 types.add("Gene");
-      	
+    	 
+    	 String[] genes = rs.getString("Gene").split("#");
+    	 for(String g: genes){
+    		 
+    		 String[] gene = geneHandler(g).split("\\$");
+    		 for(String g1 : gene){
+    		 System.out.println(g1);
+    		 relations.add(g1);
+    	     types.add("gene");}
+        	 }
+
       	 }
        if(!rs.getString("Drug").equals("")){
-      	 relations.add(rs.getString("Drug"));
-      	 types.add("Drug");
-      	 System.out.println(rs.getString("Drug"));
+    	 String[] drugs = rs.getString("Drug").split("#");
+      	 for(String d: drugs){  
+    	 String drug=Handler(d);
+    	 System.out.println(drug);  
+      	 relations.add(drug);
+      	 types.add("drug");
+      	 }      	 
       	 }
        
        relations_seperate(relations,types);
@@ -86,55 +118,34 @@ public void relations_extrator()
 }
 
 	public void relations_seperate(List<String> relations,List<String> types) {
+		  if(relations.size() >=2){
+		    	 
+  	        for (int i=0; i<relations.size();i++){
+  			for (int j=i+1; j<relations.size();j++){
+  				String Node1=relations.get(i);
+  				String type1=types.get(i);
+  				String Node2=relations.get(j);
+  				String type2=types.get(j);
+  				relations_update(Node1,type1,Node2,type2);
+  			}
+  			}
+  
 		
-	    if(relations.size() >=2){
-	    try{
-	    	 
-	    	        for (int i=0; i<relations.size();i++){
-	    			for (int j=i+1; j<relations.size();j++){
-	    				String Node1=String_handler.Nodes_sperate(relations.get(i));
-	    				String type1=types.get(i);
-	    				String Node2=String_handler.Nodes_sperate(relations.get(j));
-	    				String type2=types.get(j);
-	    				relations_update(Node1,type1,Node2,type2);
-	    			}
-	    			}
-	    	}
-	    	catch (Exception e)
-	        {
-	          System.err.println("Got an exception! ");
-	          System.err.println(e.getMessage());
-	          e.printStackTrace();
-	        }
-			
-		}	
+	}	
 	
 	}
+	
 	
 	public void relations_update(String node1,String type1,String node2,String type2) {
 		
-	   	String[] node_1=String_handler.String_spliter(node1);
-	   	String[] node_2=String_handler.String_spliter(node2);
-	   	int id_1;
+		int id_1;
 	   	int id_2;
-	   	for (int i=0; i<node_1.length;i++){
-	   		
-	   		id_1=nodeInsert(node_1[i],type1);
-	   		
-			for (int j=0; j<node_2.length;j++){
-			
-			id_2=nodeInsert(node_2[j],type2);	
-			
-			edgeInsert(id_1,id_2);	
-				
-				
-			}
-	   	}	
+	   	 		
+	    id_1=nodeInsert(node1,type1);
+	   	id_2=nodeInsert(node2,type2);	
+		edgeInsert(id_1,id_2);	
 	
 	}
-	
-	
-	
 	
 
 }

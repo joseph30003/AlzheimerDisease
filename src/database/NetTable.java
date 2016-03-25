@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -188,7 +190,7 @@ public class NetTable {
      	return result;
 	}
 	
-public void edgeInsert(int node1,int node2) {
+    public void edgeInsert(int node1,int node2) {
 		
 	    
     	try{
@@ -209,7 +211,7 @@ public void edgeInsert(int node1,int node2) {
 	}	
     
 
- public int nodeInsert(String name,String type) {
+    public int nodeInsert(String name,String type) {
     		
     	    try{
        		if(findNode(name,type)==-1){
@@ -243,7 +245,7 @@ public void edgeInsert(int node1,int node2) {
         return countofTable(edgeTable);
     	}
      
-     public int countofTable(String table){
+    public int countofTable(String table){
         
     	int count=-1;
     	try{
@@ -264,6 +266,22 @@ public void edgeInsert(int node1,int node2) {
          }
      	return count;
     	}
+    
+    public String[] String_spliter(String in,String stop){
+		String[] array=in.split(stop);
+		List<String> list = new ArrayList<String>();
+
+	    for(String s : array) {
+	       if(s != null && s.length() > 0) {
+	          list.add(s);
+	       }
+	    }
+
+	    array = list.toArray(new String[list.size()]);
+		return array;
+			
+	}
+	    
     
     
     
