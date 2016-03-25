@@ -21,6 +21,51 @@ public void build(){
 	relations_extrator();
 }
 
+public void createTable(String table) {
+    
+	String Table="";
+	
+	if(table.equals(nodeTable)) {
+		
+		Table = "CREATE TABLE "+table+" (" 
+            + "id INT NOT NULL AUTO_INCREMENT,"  
+            + "name VARCHAR(550)," 
+            + "reference_name VARCHAR(100),"
+            + "type VARCHAR(100),PRIMARY KEY (id))";
+        }else{
+        Table = "CREATE TABLE "+table+" (" 
+                + "node1 int,"  
+                + "node2 int," 
+                + "FOREIGN KEY (node1) REFERENCES "+nodeTable+" (id),"
+                + "FOREIGN KEY (node2) REFERENCES "+nodeTable+" (id))";
+        }
+          
+    try {
+        
+    	Statement st = conn.createStatement();
+        //The next line has the issue
+        
+        if(!Table.isEmpty()){
+        
+		st.executeUpdate(Table);
+        }else{
+        	System.out.println("no sql statements!");
+        }
+        System.out.println("network  "+table+" Created");
+        st.close();
+    }
+    catch (Exception e ) {
+    	System.err.println("Got an exception! ");
+        System.err.println(e.getMessage());
+    }
+}
+
+
+
+
+
+
+
 public String Handler(String in){
     String out=in.replaceAll("\\[.*?\\] ?", "").replaceAll("[\\$#]", " ").replaceAll("\\s+$", "");
 	return out;
@@ -66,7 +111,7 @@ public void relations_extrator()
   		 String disease=Handler(rs.getString("Name"));
   		
   		 relations.add(disease);
-  		 System.out.println(disease);
+  		 //System.out.println(disease);
   		 types.add("disease");
       
       	 }
@@ -77,7 +122,7 @@ public void relations_extrator()
     		 
     		 String[] gene = geneHandler(g).split("\\$");
     		 for(String g1 : gene){
-    		 System.out.println(g1);
+    		 //System.out.println(g1);
     		 relations.add(g1);
     	     types.add("gene");}
         	 }
@@ -87,7 +132,7 @@ public void relations_extrator()
     	 String[] drugs = rs.getString("Drug").split("#");
       	 for(String d: drugs){  
     	 String drug=Handler(d);
-    	 System.out.println(drug);  
+    	 //System.out.println(drug);  
       	 relations.add(drug);
       	 types.add("drug");
       	 }      	 

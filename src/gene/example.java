@@ -1,7 +1,6 @@
 package gene;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,7 @@ public static String HSAfinder(String in){
 	public static void main(String[] args)
 	  {
 		
-          String str="Grebe$dysplasia;#Acromesomelic$dysplasia$Hunter-Thompson$type";		      
+         		      
 		  String gene="BCR-ABL$(translocation)$[HSA:613$25]$[KO:K08878$K06619]";    
 		      
 		      System.out.println(geneHandler(gene));
