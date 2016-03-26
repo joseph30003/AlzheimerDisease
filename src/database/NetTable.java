@@ -13,13 +13,14 @@ public class NetTable {
 	
 	
 	protected Connection conn;
+	public  String NetName;
 	public  String nodeTable;
 	public  String edgeTable;
 	public  int NodesNum;
 	public  int EdgesNum;
 	
 	public NetTable (String net,Connection con){
-		
+		NetName=net;
 		nodeTable = net+"_nodes";
 		edgeTable = net+"_edges";
 		conn=con;
