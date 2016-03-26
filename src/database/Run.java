@@ -16,8 +16,7 @@ public class Run {
 		   
 		      NetTable gkb = new PharmGKB(conn);
 		     
-		      
-		      gkb.copyTable("");
+		      gkb.build();
 		      
 		      conn.close();
 		    }

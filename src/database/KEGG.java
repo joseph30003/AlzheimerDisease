@@ -60,12 +60,6 @@ public void createTable(String table) {
     }
 }
 
-
-
-
-
-
-
 public String Handler(String in){
     String out=in.replaceAll("\\[.*?\\] ?", "").replaceAll("[\\$#]", " ").replaceAll("\\s+$", "");
 	return out;

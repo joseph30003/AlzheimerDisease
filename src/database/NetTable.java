@@ -158,18 +158,23 @@ public class NetTable {
 		
 	}
 	
-	
 	public String findEdge(int id){
-		String result=findEdge(id,true);
-		result=result+findEdge(id,false);
+		String result=findEdge(id,true,edgeTable);
+		result=result+findEdge(id,false,edgeTable);
+		return result;
+	}
+	
+	public String findEdge(int id,String Table){
+		String result=findEdge(id,true,Table);
+		result=result+findEdge(id,false,Table);
 		return result;
 	}
 		
-	public String findEdge(int id, boolean column){
+	public String findEdge(int id, boolean column,String Table){
 		String result="";
-		String query="select node2 from "+edgeTable+" where node1="+id;
+		String query="select node2 from "+Table+" where node1="+id;
 		if(!column){
-			query="select node1 from "+edgeTable+" where node2="+id;
+			query="select node1 from "+Table+" where node2="+id;
 		}
 		try{
  		    
@@ -192,10 +197,16 @@ public class NetTable {
 	
     public void edgeInsert(int node1,int node2) {
 		
+	    edgeInsert(node1,node2,edgeTable);
+    	
+	}
+    
+    public void edgeInsert(int node1,int node2,String Table) {
+		
 	    
     	try{
     			  	if(!containEdge(node1,node2)){
-    				PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+edgeTable+"(node1,node2) VALUES(?,?)");
+    				PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+Table+"(node1,node2) VALUES(?,?)");
     	            pst_user.setInt(1, node1);
     	            pst_user.setInt(2, node2);
     	            pst_user.execute();
@@ -212,31 +223,48 @@ public class NetTable {
     
 
     public int nodeInsert(String name,String type) {
-    		
-    	    try{
-       		if(findNode(name,type)==-1){
-        			
-        		      			
-        			PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+nodeTable+"(name,type) VALUES(?,?)");
-    	            pst_user.setString(1, name);
-    	            pst_user.setString(2, type);
-    	            pst_user.execute();
-    	            pst_user.close();          		
-    	            
-        		}
-        	    		
-        				
-        	}
-        	catch (Exception e)
-            {
-              System.err.println("Got an exception! ");
-              System.err.println(e.getMessage());
-              e.printStackTrace();
-            }
-        	return findNode(name,type);
-
+    	
+    	return nodeInsert(name,type,null,nodeTable);
+    	    
 	}
+    
+    public int nodeInsert(String name,String type,String reference) {
+		
+	    return nodeInsert(name,type,reference,nodeTable);
 
+}    
+    public int nodeInsert(String name,String type,String reference,String Table) {
+		
+	    try{
+   		if(findNode(name,type)==-1){
+    			
+    		      			
+    			PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO "+Table+"(name,type,reference_name) VALUES(?,?,?)");
+	            pst_user.setString(1, name);
+	            pst_user.setString(2, type);
+	            if(reference==null){
+	            pst_user.setNull(3,java.sql.Types.VARCHAR);  	
+	            }else pst_user.setString(3, reference);
+	            pst_user.execute();
+	            pst_user.close();          		
+	            
+    		}
+    	    		
+    				
+    	}
+    	catch (Exception e)
+        {
+          System.err.println("Got an exception! ");
+          System.err.println(e.getMessage());
+          e.printStackTrace();
+        }
+    	return findNode(name,type);
+
+}    
+    
+    
+    
+    
     public int countNodes(){
         return countofTable(nodeTable);
     	}
