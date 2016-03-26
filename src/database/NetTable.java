@@ -16,7 +16,7 @@ public class NetTable {
 	public  String nodeTable;
 	public  String edgeTable;
 	public  int NodesNum;
-	public  int EegesNum;
+	public  int EdgesNum;
 	
 	public NetTable (String net,Connection con){
 		
@@ -24,7 +24,7 @@ public class NetTable {
 		edgeTable = net+"_edges";
 		conn=con;
 		NodesNum=countNodes();
-		NodesNum=countEdges();
+		EdgesNum=countEdges();
 		
 	}
 	

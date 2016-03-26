@@ -14,10 +14,11 @@ public class Run {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable KEGG = new KEGG(conn);
-		      KEGG.build();
+		      NetTable gkb = new PharmGKB(conn);
+		     
 		      
-		      System.out.println(KEGG.NodesNum);
+		      gkb.copyTable("");
+		      
 		      conn.close();
 		    }
 		    catch (Exception e)
