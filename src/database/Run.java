@@ -3,10 +3,17 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
+import mmserver.MetaMap;
+
 public class Run {
 	
 		public static void main(String[] args)
 	  {
+			
+			
+			
+			
 		try{
 			// create our mysql database connection
 		      
@@ -14,10 +21,14 @@ public class Run {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable gkb = new PharmGKB(conn);
-		     
-		      gkb.build();
+		      NetTable kegg = new GWAS(conn);
+		      MetaMap mm=new MetaMap("");
+		      MetaTable mt=new MetaTable(conn,mm);
+		      mt.setSource(kegg);
+		      mt.run();
 		      
+		      
+
 		      conn.close();
 		    }
 		    catch (Exception e)

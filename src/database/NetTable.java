@@ -18,16 +18,24 @@ public class NetTable {
 	public  String edgeTable;
 	public  int NodesNum;
 	public  int EdgesNum;
+	public  String[] types;
+	public  int[] TypeNum;
 	
 	public NetTable (String net,Connection con){
 		NetName=net;
 		nodeTable = net+"_nodes";
 		edgeTable = net+"_edges";
 		conn=con;
-		NodesNum=countNodes();
-		EdgesNum=countEdges();
+		
 		
 	}
+	public void Report(){
+		NodesNum=countNodes();
+		EdgesNum=countEdges();
+		types=Types();
+		TypeNum=CountofTypes();
+	}
+	
 	
 	public void build(){
 		dropNet();
@@ -264,7 +272,37 @@ public class NetTable {
 }    
     
     
-    
+    public String[] Types(){
+    	String rs="";
+    	try{
+    		Statement st = conn.createStatement();    
+     		String query= "select distinct(type) from "+nodeTable;
+     		ResultSet rs_node = st.executeQuery(query);
+     		
+     		while(rs_node.next()){
+     			rs=rs+rs_node.getString(1)+",";  			
+     		}
+     		st.close();
+     	}
+     	catch (Exception e)
+         {
+           System.err.println("Got an exception! ");
+           System.err.println(e.getMessage());
+           e.printStackTrace();
+         }
+    	if(rs.isEmpty())	return null;
+    	else return rs.split(",");
+    	}
+    public int[] CountofTypes(){
+    	if(types==null)return null;
+    	else{
+    	int[] rs=new int[types.length];
+    	for(int i=0;i<types.length;i++){
+    		rs[i]=countofTable(nodeTable,types[i]);
+    	}
+    	return rs;
+    	}
+    }
     
     public int countNodes(){
         return countofTable(nodeTable);
@@ -280,6 +318,27 @@ public class NetTable {
     	try{
     		Statement st = conn.createStatement();    
      		String query_node= "select count(*) from "+table;
+     		ResultSet rs_node = st.executeQuery(query_node);
+     		
+     		if(rs_node.next()){
+     			count=rs_node.getInt(1);     			
+     		}
+     		st.close();
+     	}
+     	catch (Exception e)
+         {
+           System.err.println("Got an exception! ");
+           System.err.println(e.getMessage());
+           e.printStackTrace();
+         }
+     	return count;
+    	}
+    public int countofTable(String table,String type){
+        
+    	int count=-1;
+    	try{
+    		Statement st = conn.createStatement();    
+     		String query_node= "select count(*) from "+table+" where type=\""+type+"\"";
      		ResultSet rs_node = st.executeQuery(query_node);
      		
      		if(rs_node.next()){
@@ -311,7 +370,41 @@ public class NetTable {
 			
 	}
 	    
+    public int getNumofType(String type){
+    	int rs=-1;
+    	for(int i=0;i<types.length;i++){
+    		if(types[i].equals(type)) rs =TypeNum[i];
+    	}
+    	return rs;
+    }
     
+    public Node[] getNodes(String type){
+     int length=getNumofType(type);
+     if(length>0){
+     Node[] nodes=new Node[length];
+     
+    	 try{
+     		Statement st = conn.createStatement();    
+      		String query_node= "select id,name,type from "+nodeTable+" where type=\""+type+"\" and reference_name is null";
+      		ResultSet rs = st.executeQuery(query_node);
+      		int i=0;
+      		while(rs.next() && i<length){
+      		  
+      			nodes[i]=new Node(rs.getString(2),rs.getString(3),rs.getInt(1),NetName);
+      			i++;
+      		}
+      		st.close();
+      	}
+      	catch (Exception e)
+          {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+          } 
+    
+     return nodes;	
+     }else return null;	
+    }
     
     
 	

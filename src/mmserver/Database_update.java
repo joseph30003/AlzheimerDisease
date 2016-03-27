@@ -21,7 +21,7 @@ public class Database_update {
 	public static void DataInput(String term,int source_id,String prefer_name, String Id, String type,int score,String source, Connection conn){
 		try
 		{
-		PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO Metamap(term,prefer_name,ID,type,score,source,source_id) VALUES(?,?,?,?,?,?,?)");
+		PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO MetaTable(term,prefer_name,UMLS,type,score,source,source_id) VALUES(?,?,?,?,?,?,?)");
         pst_user.setString(1,term);
         pst_user.setString(2,prefer_name);
         pst_user.setString(3,Id);
@@ -42,23 +42,24 @@ public class Database_update {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] sources={"KEGG","GWAS","PheWAS","FDA"};
-		String type="disease";
+		String[] sources={"KEGG","GWAS","PheWAS","FDA","PharmGKB"};
+		String[] types={"disease","drug"};
 	    try
 	    {
 	     String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	     Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	     MetaMapApi api = new MetaMapApiImpl();
-		 api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy"); 
+	     MetaMapApi api = new MetaMapApiImpl("");
+		 
 		 
 		  
 		 
 	     for(int i=0;i < sources.length; i++){
 	    	    	 
-	    	 
+	     for(String type:types)	{ 
 		 
-		 
-	     String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+type+"\"" ;
+		 if(type.equals("disease")) api.setOptions("-I -J dsyn,fndg,neop,mobd,patf,sosy,acab,anab,comd,cgab,emod,fngs,inpo,inpr"); 
+		 else api.setOptions("-I");
+		 String query_search = "select id,name from "+sources[i]+"_nodes where type =\""+type+"\" and reference_name is null" ;
 	     //System.out.println(query_search);
 	     
    	     ResultSet rs = conn.createStatement().executeQuery(query_search);
@@ -92,7 +93,7 @@ public class Database_update {
     	  
       }
 	     
-	    
+	     }  
 	     }
 	      
 	    }
