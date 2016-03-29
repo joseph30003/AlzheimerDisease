@@ -73,7 +73,7 @@ public String Handler(String in){
  }
 
  public String HSAfinder(String in){
- 	
+ 	in=in.toUpperCase();
  	Pattern p = Pattern.compile("\\[HSA:(.*?)\\]");
  	Matcher m = p.matcher(in);
 		String out = "";

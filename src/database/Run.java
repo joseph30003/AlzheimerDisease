@@ -3,8 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
-import mmserver.MetaMap;
+//import gene.Gene;
+//import mmserver.MetaMap;
 
 public class Run {
 	
@@ -21,13 +21,26 @@ public class Run {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable kegg = new GWAS(conn);
-		      MetaMap mm=new MetaMap("");
-		      MetaTable mt=new MetaTable(conn,mm);
-		      mt.setSource(kegg);
-		      mt.run();
+		      NetTable KEGG = new KEGG(conn);
+		      KEGG.build();
 		      
+		      /*gwas.Report();
+		      Node[] nn=gwas.getNodes("gene");
+		      Gene[] gg=new Gene[nn.length];
+		      for(String t:gwas.types){
+		    	  System.out.println(t);
+		      }
 		      
+		      for(int i=0;i<nn.length;i++){
+		    	
+		    	  System.out.println(nn[i].name); 
+		    	  //gg[i]=new Gene(nn[i].name,conn);
+		      }
+		      
+		      for(Gene g:gg){
+		    	  System.out.println(g.name); 
+		    	  System.out.println(g.ID);
+		      }*/
 
 		      conn.close();
 		    }
