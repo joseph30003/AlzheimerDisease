@@ -38,7 +38,7 @@ public void relations_extrator()
     while (rs.next())
     {
   	 
-  	  String gene=Gene_handler(rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+  	  String gene=Gene_handler(rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)).replaceAll(" ", "");
   	  if(!rs.getString(2).equals("")){
   		
   		 relations.add(rs.getString(2));
@@ -158,11 +158,11 @@ public void relations_extrator()
 	public String Gene_handler(String gene1,String gene2,String gene3,String gene4) {
 	    
 	    if( !gene3.equals("") ){
-	    	return gene3.replace(",", "#");
+	    	return gene3.replaceAll("[,;]", "#");
 	    }else if( !gene1.equals("") && !gene2.equals("")){
 	    	return gene1+"#"+gene2;
 	    }else{
-	    	return gene4;
+	    	return gene4.replaceAll("[-,]","#");
 	    }
 		
 		

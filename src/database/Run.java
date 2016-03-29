@@ -21,23 +21,25 @@ public class Run {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		   
-		      NetTable KEGG = new KEGG(conn);
-		      KEGG.build();
+		      NetTable gwas = new GWAS(conn);
 		      
-		      /*gwas.Report();
-		      Node[] nn=gwas.getNodes("gene");
+		      
+		      gwas.build();
+		     
+		      /*Node[] nn=gwas.getNodes("gene");
 		      Gene[] gg=new Gene[nn.length];
 		      for(String t:gwas.types){
 		    	  System.out.println(t);
 		      }
 		      
 		      for(int i=0;i<nn.length;i++){
-		    	
+		    	  if(!nn[i].name.replace(" ", "").matches("[0-9]+")){
 		    	  System.out.println(nn[i].name); 
+		    	  }
 		    	  //gg[i]=new Gene(nn[i].name,conn);
 		      }
 		      
-		      for(Gene g:gg){
+		      /*for(Gene g:gg){
 		    	  System.out.println(g.name); 
 		    	  System.out.println(g.ID);
 		      }*/
