@@ -382,30 +382,27 @@ public class NetTable {
     }
      
     
-    public Node[] getNodes(String... vars){
+    public Node[] getNodes(String... type){
       int length=this.countNodes();
       
-      String cond="";
-  	  if(vars.length>0){
-  		  cond=" where type=\""+vars[0]+"\"";
-  		  length=getNumofType(vars[0]);
+      String cond=" order by id";
+  	  if(type.length>0){
+  		  cond=" where type=\""+type[0]+"\""+cond;
+  		  length=getNumofType(type[0]);
   	  }
-  	  if(vars.length>1){
-  		  cond=cond+" and "+vars[1];
-  	  }	
-    	
+  	     	
     
      if(length>0){
      Node[] nodes=new Node[length];
      
     	 try{
      		Statement st = conn.createStatement();    
-      		String query_node= "select id,name,type from "+nodeTable+cond;
+      		String query_node= "select id,name,reference_name,type from "+nodeTable+cond;
       		ResultSet rs = st.executeQuery(query_node);
       		int i=0;
       		while(rs.next() && i<length){
       		  
-      			nodes[i]=new Node(rs.getString(2),rs.getString(3),rs.getInt(1),NetName);
+      			nodes[i]=new Node(rs.getString(2),rs.getString(4),rs.getString(3),rs.getInt(1),NetName);
       			i++;
       		}
       		st.close();
