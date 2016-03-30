@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="MetaMapApi.jar"/>
-	<classpathentry kind="lib" path="prologbeans.jar"/>
-	<classpathentry kind="lib" path="mysql-connector-java-5.1.38.jar"/>
-	<classpathentry kind="lib" path="opennlp-tools-1.6.0.jar"/>
-	<classpathentry kind="lib" path="opennlp-uima-1.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="MetaMapApi.jar"/>
+	<classpathentry exported="true" kind="lib" path="prologbeans.jar"/>
+	<classpathentry exported="true" kind="lib" path="mysql-connector-java-5.1.38.jar"/>
+	<classpathentry exported="true" kind="lib" path="opennlp-tools-1.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="opennlp-uima-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

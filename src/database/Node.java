@@ -15,8 +15,8 @@ public class Node {
 		
 	}
 	
-	public boolean equal(Node node){
-		if(id==node.id && Net.equals(node.Net)) return true;
+	public boolean equal(Node n){
+		if( this.name.equals(n.name) && this.type.equals(n.type) ) return true;
 		else return false;
 	}
 

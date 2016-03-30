@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import gene.Gene;
+
 public class NetTable {
 	
 	
@@ -379,6 +381,7 @@ public class NetTable {
     }
     
     public Node[] getNodes(String type){
+     this.Report();	
      int length=getNumofType(type);
      if(length>0){
      Node[] nodes=new Node[length];
@@ -406,7 +409,28 @@ public class NetTable {
      }else return null;	
     }
     
-    
+    public void UpdateRef(String text,int id) {
+		try
+	    {
+	    
+				PreparedStatement node_update =  (PreparedStatement) conn.prepareStatement("update "+nodeTable+" set reference_name = ? where id = ?");
+			
+			    node_update.setString(1, text);
+			    node_update.setInt(2, id);
+				node_update.executeUpdate();
+				
+	   }
+	    catch (Exception e)
+	    {
+	      System.err.println("Got an exception! ");
+	      e.printStackTrace();
+	    }
+	}
+    public void UpdateGene(Gene gene,int id){
+    	
+    	UpdateRef(gene.name,id);
+    	
+    }
 	
 	
 
