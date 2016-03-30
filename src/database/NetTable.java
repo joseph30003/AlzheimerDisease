@@ -80,7 +80,7 @@ public class NetTable {
     		
     		Table = "CREATE TABLE "+table+" (" 
                 + "id INT NOT NULL AUTO_INCREMENT,"  
-                + "name VARCHAR(200)," 
+                + "name VARCHAR(600)," 
                 + "reference_name VARCHAR(100),"
                 + "type VARCHAR(100),PRIMARY KEY (id))";
             }else{
@@ -373,22 +373,34 @@ public class NetTable {
 	}
 	    
     public int getNumofType(String type){
+    	this.Report();	
     	int rs=-1;
     	for(int i=0;i<types.length;i++){
     		if(types[i].equals(type)) rs =TypeNum[i];
     	}
     	return rs;
     }
+     
     
-    public Node[] getNodes(String type){
-     this.Report();	
-     int length=getNumofType(type);
+    public Node[] getNodes(String... vars){
+      int length=this.countNodes();
+      
+      String cond="";
+  	  if(vars.length>0){
+  		  cond=" where type=\""+vars[0]+"\"";
+  		  length=getNumofType(vars[0]);
+  	  }
+  	  if(vars.length>1){
+  		  cond=cond+" and "+vars[1];
+  	  }	
+    	
+    
      if(length>0){
      Node[] nodes=new Node[length];
      
     	 try{
      		Statement st = conn.createStatement();    
-      		String query_node= "select id,name,type from "+nodeTable+" where type=\""+type+"\" and reference_name is null";
+      		String query_node= "select id,name,type from "+nodeTable+cond;
       		ResultSet rs = st.executeQuery(query_node);
       		int i=0;
       		while(rs.next() && i<length){
