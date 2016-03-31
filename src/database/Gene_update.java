@@ -2,17 +2,12 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-//import java.util.ArrayList;
-//import java.util.List;
 
 import gene.Gene;
-//import mmserver.MetaMap;
 
-public class Run {
-	
-     	
-	
-		public static void main(String[] args)
+public class Gene_update {
+
+	public static void main(String[] args)
 	  {
 			
 		
@@ -58,5 +53,7 @@ public class Run {
 	
 	
 }
-
+	
+	
+	
 }
