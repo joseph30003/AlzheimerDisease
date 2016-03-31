@@ -132,6 +132,29 @@ public class NetTable {
      	return id;
 	 }
 	
+	public Node getNode(int id){
+		Node node=null;
+		 try{
+	     		Statement st = conn.createStatement();    
+	      		String query_node= "select id,name,reference_name,type from "+nodeTable+" where id="+id;
+	      		ResultSet rs = st.executeQuery(query_node);
+	      		
+	      		if(rs.next()){
+	      		  
+	      			node=new Node(rs.getString(2),rs.getString(4),rs.getString(3),rs.getInt(1),NetName);
+	      			
+	      		}
+	      		st.close();
+	      	}
+	      	catch (Exception e)
+	          {
+	            System.err.println("Got an exception! ");
+	            System.err.println(e.getMessage());
+	            e.printStackTrace();
+	          } 
+     	return node;
+	 }
+	
 	public boolean containEdge(int node1,int node2){
 		
 		    		

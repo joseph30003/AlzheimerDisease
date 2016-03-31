@@ -69,7 +69,7 @@ public class Nodes_nomalization {
 				String id=rs.getString(1);
 				String table=rs.getString(2);
 				int source_id=rs.getInt(3);
-				
+				//System.out.println(table);
 				PreparedStatement node_update =  (PreparedStatement) conn.prepareStatement("update "+table+"_nodes set reference_name = ? where id = ?");
 				
 					  node_update.setString(1, id);
