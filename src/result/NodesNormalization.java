@@ -43,7 +43,7 @@ public class NodesNormalization {
 			  ResultSet rs_1 = conn.createStatement().executeQuery(query_1);
 			  String query_2 = "select prefer_name from MetaTable where UMLS=\""+UMID+"\"";
 			  ResultSet rs_2 = conn.createStatement().executeQuery(query_2);
-			  String query_3 = "select prefer_name from Metamap where ID=\""+UMID+"\"";
+			  String query_3 = "select prefer_name from DrugBank_Metamap where UMLS=\""+UMID+"\"";
 			  ResultSet rs_3 = conn.createStatement().executeQuery(query_3);
 			  String query_4 = "select Name from UMLS where id=\""+UMID+"\"";
 			  ResultSet rs_4 = conn.createStatement().executeQuery(query_4);

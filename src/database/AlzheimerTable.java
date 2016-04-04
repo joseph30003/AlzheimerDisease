@@ -38,8 +38,8 @@ public static void main(String[] args) {
 	    
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      NetTable sr=new NetTable("FDAPharmGKBPheWASKEGGGWAS",conn);
-	      NetTable n=new NetTable("Alzheimer3",conn);
+	      NetTable sr=new NetTable("FDAPharmGKBPheWASKEGGGWASDrugBank",conn);
+	      NetTable n=new NetTable("AlzheimerAll",conn);
 	      n.build();
 	      sr.Report();
 	      int id=sr.findNode("C0002395", "disease");
@@ -48,7 +48,7 @@ public static void main(String[] args) {
 	      List<Integer> stack=new ArrayList<Integer>();
 	      stack.add(id);
 	      int level=0;
-	      while(level<3){
+	      while(!stack.isEmpty()){
 	      
 	      String edges="";	  
 	    	 

@@ -23,7 +23,7 @@ public class Run {
 		      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-		   
+		  
 		      NetTable gwas = new KEGG(conn);
 		      Node[] nn=gwas.getNodes("gene");
 		      		      //List<Gene> gg = new ArrayList<Gene>();
@@ -41,7 +41,7 @@ public class Run {
 		       gwas.UpdateGene(new Gene(nn[i].name,conn),nn[i].getId());
 		       }
 		       
-		     
+		    
 		  
 		      
 		    

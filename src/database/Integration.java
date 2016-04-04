@@ -93,9 +93,9 @@ public static void main(String[] args) {
       String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
       Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
       
-      String[] sources={"KEGG","GWAS","PheWAS","PharmGKB","FDA"};
+      String[] sources={"FDAPharmGKBPheWASKEGGGWAS","DrugBank"};
       
-      System.out.println(getNumber(sources,4,conn));
+      System.out.println(getNumber(sources,1,conn));
       
       
      //Conbine("table1","table2",conn);
