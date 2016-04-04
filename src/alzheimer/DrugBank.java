@@ -153,7 +153,21 @@ public static int Nodes_update(String name,String type,Connection conn) {
         }
     	return id;
 
-}	
+}
+
+public static boolean isRealUMLS(String UMLS){
+	boolean rs=true;
+	String[] pool={"C1457887","C0012634","C3687832","C1273517","C1397014","C0030193","C1444656","C0278140"};
+	for(String s: pool){
+		if (s.equals("UMLS")) rs=false;
+	}
+	
+	return rs;
+	
+}
+
+
+
 
 public static void disease_update(int new_id,int old_id,Connection conn) {
 	
@@ -162,17 +176,17 @@ public static void disease_update(int new_id,int old_id,Connection conn) {
 	
 	try{
 		
-		String disease_query="select UMLS from DrugBank_disease where id="+old_id+" order by score desc limit 1";
+		String disease_query="select UMLS from DrugBank_disease where id="+old_id+" and score > 900 order by score desc";
 		Statement st = conn.createStatement();
         ResultSet rs_d = st.executeQuery(disease_query);
         while(rs_d.next()){
-      	  
+        	if(isRealUMLS(rs_d.getString(1))){  
         int disease_id=Nodes_update(rs_d.getString(1),"disease",conn);
         
         Edges_update(new_id,disease_id,conn);
-      	  
+      	break;  
         }
-		
+        }
 		        
 		
 		

@@ -21,51 +21,6 @@ public void build(){
 	relations_extrator();
 }
 
-public void createTable(String table) {
-    
-	String Table="";
-	
-	if(table.equals(nodeTable)) {
-		
-		Table = "CREATE TABLE "+table+" (" 
-            + "id INT NOT NULL AUTO_INCREMENT,"  
-            + "name VARCHAR(550)," 
-            + "reference_name VARCHAR(100),"
-            + "type VARCHAR(100),PRIMARY KEY (id))";
-        }else{
-        Table = "CREATE TABLE "+table+" (" 
-                + "node1 int,"  
-                + "node2 int," 
-                + "FOREIGN KEY (node1) REFERENCES "+nodeTable+" (id),"
-                + "FOREIGN KEY (node2) REFERENCES "+nodeTable+" (id))";
-        }
-          
-    try {
-        
-    	Statement st = conn.createStatement();
-        //The next line has the issue
-        
-        if(!Table.isEmpty()){
-        
-		st.executeUpdate(Table);
-        }else{
-        	System.out.println("no sql statements!");
-        }
-        System.out.println("network  "+table+" Created");
-        st.close();
-    }
-    catch (Exception e ) {
-    	System.err.println("Got an exception! ");
-        System.err.println(e.getMessage());
-    }
-}
-
-
-
-
-
-
-
 public String Handler(String in){
     String out=in.replaceAll("\\[.*?\\] ?", "").replaceAll("[\\$#]", " ").replaceAll("\\s+$", "");
 	return out;
@@ -79,7 +34,7 @@ public String Handler(String in){
  }
 
  public String HSAfinder(String in){
- 	
+ 	in=in.toUpperCase();
  	Pattern p = Pattern.compile("\\[HSA:(.*?)\\]");
  	Matcher m = p.matcher(in);
 		String out = "";
