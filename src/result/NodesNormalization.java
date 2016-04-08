@@ -105,9 +105,9 @@ public class NodesNormalization {
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		      
 		      
-		      String query = "select id from Alzheimer_nodes";
+		      String query = "select id from AlzheimerAll_nodes";
 			  ResultSet rs = conn.createStatement().executeQuery(query);
-		      String file="/Users/joseph/nodes.csv";
+		      String file="nodes.csv";
 		      File_creator.writetofile("Id,Label,type", file);
 			     
 				while(rs.next()){
