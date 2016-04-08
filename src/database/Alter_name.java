@@ -72,15 +72,15 @@ public class Alter_name {
          }
      	return id;
 	 }
-	 public static int nodeInsert(String name,Connection conn) {
+	 public static int nodeInsert(String name,String UMLS,Connection conn) {
 			
 		    try{
 	   		if(findNode(name,conn)==-1){
 	    			
 	    		      			
-	    			PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO Alters_UMLS (Name) VALUES(?)");
+	    			PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO Alters_UMLS (Name,UMLS) VALUES(?,?)");
 		            pst_user.setString(1, name);
-		          
+		            pst_user.setString(2, UMLS);
 		            pst_user.execute();
 		            pst_user.close();          		
 		            
@@ -114,7 +114,7 @@ public class Alter_name {
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		      createTable(conn);
 		      PreparedStatement pst_user =  (PreparedStatement) conn.prepareStatement("INSERT INTO Alters(id,Alters) VALUES(?,?)");
-		      String query="select Name,Alternate_Names from pharmGKB_diseases";
+		      String query="select d.Name,d.Alternate_Names,u.UMLS from pharmGKB_diseases d,pharmGKB_rawUMLS u where d.Accession_Id = u.Accession_Id";
 		      
 		     Statement st = conn.createStatement();
 		       
@@ -123,7 +123,7 @@ public class Alter_name {
 		      while (rs.next())
 		      {
 		       System.out.println(rs.getString(1));
-		       int id=nodeInsert(rs.getString(1),conn);
+		       int id=nodeInsert(rs.getString(1),rs.getString(3),conn);
 		       if(!rs.getString(2).isEmpty()){
 		       String[] alters=rs.getString(2).split("\",");
 		       for(String a:alters){

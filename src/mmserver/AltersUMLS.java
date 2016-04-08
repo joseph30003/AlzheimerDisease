@@ -76,10 +76,9 @@ public class AltersUMLS {
 		              
 		                //System.out.println(term);
 		            	DataInput(term,id,mapEv.getPreferredName(),mapEv.getConceptId(),Math.abs(mapEv.getScore()),conn);
-		            	              
-		                                       }
+		                       }
 				
-		                                          }
+		                        }
 			                                         } 
 	                                                    }  
 		

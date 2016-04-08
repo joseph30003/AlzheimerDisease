@@ -76,7 +76,7 @@ public class TrimeTable {
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 	      
-	      String[] sources={"KEGG","GWAS","PheWAS","PharmGKB","FDA"};
+	      String[] sources={"AlzheimerAll"};
 	      for(int i=0;i < sources.length; i++){
 	      trimer(sources[i],conn);
 	      }
