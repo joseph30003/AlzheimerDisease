@@ -110,7 +110,7 @@ public static void Insert(String Aid,String Name,String UMLS,String type,Connect
 			      createTable(conn);
 			      String[] type={"disease","drug"};
 			      for(String t:type){
-			      String query="select Accession_Id,Name,External_Vocabulary from pharmGKB_"+t+"s";
+			      String query="select Accession_Id,Name,External_Vocabulary from PharmGKB_"+t+"s";
 			      
 			      ResultSet rs = st.executeQuery(query);
 		     		

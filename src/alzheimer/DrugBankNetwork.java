@@ -21,7 +21,7 @@ public class DrugBankNetwork {
 		      PreparedStatement pst_user =  (PreparedStatement) conn_a.prepareStatement("INSERT INTO DrugBank(WID,Id,Name,Indication,Resourse,Indentifier,p_id,p_name) VALUES(?,?,?,?,?,?,?,?)");
 		      
 		      
-		      String myUrl_D = "jdbc:mysql://biomedinformatics.is.umbc.edu/drugbank";
+		      String myUrl_D = "jdbc:mysql://biomedinformatics.is.umbc.edu/biowh";
 		      Connection conn_d = DriverManager.getConnection(myUrl_D, "weijianqin", "weijianqin");
 		      String query="select DrugBank.WID,DrugBank.Id,DrugBank.Name,DrugBank.Indication,DrugBankExternalIdentifier.Resource,DrugBankExternalIdentifier.Identifier,DrugBankTargetPolypeptide.Id,DrugBankTargetPolypeptide.Name from DrugBank,DrugBankExternalIdentifier,DrugBankTarget,DrugBankTargetPolypeptide where DrugBank.WID = DrugBankExternalIdentifier.DrugBank_WID and DrugBank.WID = DrugBankTarget.DrugBank_WID and DrugBankTargetPolypeptide.DrugBankTarget_WID = DrugBankTarget.WID";
 		      Statement st_d = conn_d.createStatement();

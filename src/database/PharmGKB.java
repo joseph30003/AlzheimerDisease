@@ -3,7 +3,9 @@ package database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import java.util.Arrays;
+
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -14,11 +16,16 @@ public class PharmGKB extends NetTable {
 		super("PharmGKB", con);
 		// TODO Auto-generated constructor stub
 	}
-    
+ 
+	
+	
+	
+	
 	public void build(){
 		String tmpTable="GKBtmp";
 		dropNet();
 		createNet();
+		dataPreparation();
 		createTmpEdge(tmpTable);
 		relations_extrator(tmpTable);
 		
@@ -47,7 +54,43 @@ public class PharmGKB extends NetTable {
   
      }	
 	
-	
+	  public void dataPreparation(){
+		  NetTable GKB = new NetTable("GKB",this.conn);
+		  GKB.build();
+		  try{
+				
+			    String query="select Entity1_id,Entity1_name,Entity1_type,Entity2_id,Entity2_name,Entity2_type from PharmGKB";
+			    
+			   
+			  
+			    
+			    Statement st = conn.createStatement();
+			     
+			    // execute the query, and get a java resultset
+			    ResultSet rs = st.executeQuery(query);
+			    while (rs.next())
+			    {
+			    	int node1=GKB.nodeInsert(rs.getString("Entity1_name"), rs.getString("Entity1_type"), rs.getString("Entity1_id"));
+			    	int node2=GKB.nodeInsert(rs.getString("Entity2_name"), rs.getString("Entity2_type"), rs.getString("Entity2_id"));
+			  	    GKB.edgeInsert(node1, node2);	  
+			  	  
+			       }
+			    //return null;
+			    
+			    st.close();
+			     
+			    
+			    
+			    
+			  }
+			  catch (Exception e)
+			  {
+			    System.err.println("Got an exception! ");
+			    System.err.println(e.getMessage());
+			    e.printStackTrace();
+			  }
+		  
+	  }
 	
 	
        public void copyTable(String tmpTable){
@@ -80,8 +123,8 @@ public class PharmGKB extends NetTable {
       
        
   
-       public void removeNode(int id,String tmpTable){
-    	 System.out.println(id+"____"+findEdge(id,tmpTable)); 
+     public void removeNode(int id,String tmpTable){
+    	 //System.out.println(id+"____"+findEdge(id,tmpTable)); 
     	 int[] edge=trimEdges(findEdge(id,tmpTable).split(","));
          
     	 for(int i=0;i<edge.length;i++){
@@ -92,7 +135,7 @@ public class PharmGKB extends NetTable {
     	removeEdges(id,tmpTable); 
     	 
        }
-     public void removeEdges(int id,String tmpTable){
+    public void removeEdges(int id,String tmpTable){
     	 
     	 try
     	    {
@@ -238,7 +281,7 @@ public class PharmGKB extends NetTable {
     
        public int copyNodes(int id){
     	  int newid=-1; 
-    	  String query="select id_gkb,name,type from GKB_nodes where id="+id;
+    	  String query="select reference_name,name,type from GKB_nodes where id="+id;
    	    
           try {
         	   

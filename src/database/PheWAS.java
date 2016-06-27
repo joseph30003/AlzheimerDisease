@@ -26,7 +26,7 @@ public void relations_extrator()
 	try{
 	
       
-    String query="select snp,phewas_phenotype,gene_name from phewas";
+    String query="select snp,phewas_phenotype,gene_name from PheWAS";
     
    
     List<String> relations = new ArrayList<String>();
