@@ -134,7 +134,7 @@ public static void Edges_update(int node1,int node2,Connection conn) {
 	      String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/Alzheimer";
 	      
 	      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
-	      String query="select snp,phewas_phenotype,gene_name from phewas";
+	      String query="select snp,phewas_phenotype,gene_name from PheWAS";
 	      
 	     
 	      List<String> relations = new ArrayList<String>();

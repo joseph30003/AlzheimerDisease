@@ -48,7 +48,7 @@ public void relations_extrator()
 {
 	try{
 	
-    String query="select Entry,Name,Gene,Drug,Reference from KEGG_Disease order by Entry";
+    String query="select Entry,Name,Gene,Drug,Reference from KEGG order by Entry";
     
    
     List<String> relations = new ArrayList<String>();

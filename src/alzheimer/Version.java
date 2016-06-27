@@ -15,7 +15,7 @@ public class Version {
 
        
        
-        String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu/drugabuse";
+        String myUrl = "jdbc:mysql://biomedinformatics.is.umbc.edu:3306/biowh";
         
         String user = "weijianqin";
         String password = "weijianqin";
