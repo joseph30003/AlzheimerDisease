@@ -53,7 +53,7 @@ public class MetaTable {
         
 		dropTable(Name);
 		
-	 	String 	Table = "CREATE TABLE "+Name+" (term varchar(500),"
+	 	String 	Table = "CREATE TABLE "+Name+" (term varchar(600),"
 	 			+ "prefer_name varchar(1000), "
 	 			+ "UMLS varchar(100), "
 	 			+ "type varchar(50), "
