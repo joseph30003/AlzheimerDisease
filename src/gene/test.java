@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 public class test {
 	
@@ -49,9 +49,9 @@ public static void main(String[] args){
       {
         
        
-        String disease = rs.getString("Name");
+        //String disease = rs.getString("Name");
         String AN = term_split(rs.getString(2));
-        String AI = rs.getString(3);
+        //String AI = rs.getString(3);
         System.out.println(rs.getString(2));
         System.out.println(AN);
          

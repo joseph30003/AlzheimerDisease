@@ -31,6 +31,12 @@ public class PharmGKB extends NetTable {
 		
 	}
 	
+	 private String TypeNormalization(String type){
+		 if (type.equals("VariantLocation")) return "snp";
+		 else return type.toLowerCase();
+	 }
+	
+	
 	 public void createTmpEdge(String temTable){
   	   copyTable(temTable);
   	   String query="select id from GKB_nodes where type='haplotype'";   
@@ -70,8 +76,8 @@ public class PharmGKB extends NetTable {
 			    ResultSet rs = st.executeQuery(query);
 			    while (rs.next())
 			    {
-			    	int node1=GKB.nodeInsert(rs.getString("Entity1_name"), rs.getString("Entity1_type"), rs.getString("Entity1_id"));
-			    	int node2=GKB.nodeInsert(rs.getString("Entity2_name"), rs.getString("Entity2_type"), rs.getString("Entity2_id"));
+			    	int node1=GKB.nodeInsert(rs.getString("Entity1_name"), TypeNormalization(rs.getString("Entity1_type")), rs.getString("Entity1_id"));
+			    	int node2=GKB.nodeInsert(rs.getString("Entity2_name"), TypeNormalization(rs.getString("Entity2_type")), rs.getString("Entity2_id"));
 			  	    GKB.edgeInsert(node1, node2);	  
 			  	  
 			       }

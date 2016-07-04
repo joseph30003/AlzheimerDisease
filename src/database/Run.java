@@ -23,9 +23,9 @@ public class Run {
 		      
 		      Connection conn = DriverManager.getConnection(myUrl, "weijianqin", "weijianqin");
 		  
-		      NetTable fda = new FDA(conn);
+		      NetTable PharmGKB = new PharmGKB(conn);
 		      
-		     fda.build();
+		     PharmGKB.build();
 		    
 		  
 		      
