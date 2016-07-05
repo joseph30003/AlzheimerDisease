@@ -25,7 +25,7 @@ public class build {
 		  
 		      NetTable PharmGKB = new PharmGKB(conn);
 		      
-		     PharmGKB.build();
+		      PharmGKB.build();
 		    
 		  
 		      

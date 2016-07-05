@@ -14,7 +14,7 @@ public class NetTable {
 	
 	
 	
-	protected Connection conn;
+	public Connection conn;
 	public  String NetName;
 	public  String nodeTable;
 	public  String edgeTable;
